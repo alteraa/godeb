@@ -2,7 +2,7 @@ package runner
 
 import (
 	"fmt"
-	
+
 	"deb-tester/pkg/config"
 	"deb-tester/pkg/installer"
 	"deb-tester/pkg/logger"
@@ -36,9 +36,6 @@ func Run(cfg *config.Config) error {
 		if err := verifier.VerifyGeneratedFiles(cfg.VerifyGeneratedFiles); err != nil {
 			return fmt.Errorf("generated file verification failed: %w", err)
 		}
-		if err := mockManager.VerifyUsage(); err != nil {
-			return fmt.Errorf("mock usage verification failed: %w", err)
-		}
 
 		// Remove
 		logger.Phase("[Phase 3/4] Removing Package")
@@ -51,10 +48,13 @@ func Run(cfg *config.Config) error {
 		if err := verifier.VerifyClean(cfg.DebPath, cfg.VerifyGeneratedFiles); err != nil {
 			return fmt.Errorf("cleanup verification failed: %w", err)
 		}
-		
+
+		if err := mockManager.VerifyUsage(); err != nil {
+			return fmt.Errorf("mock usage verification failed: %w", err)
+		}
+
 		logger.Success("Iteration %d completed successfully.", i)
 	}
 
 	return nil
 }
-
