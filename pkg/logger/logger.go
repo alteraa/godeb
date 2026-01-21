@@ -17,7 +17,7 @@ const (
 )
 
 func init() {
-	// Remove date/time from logs for cleaner output if desired, 
+	// Remove date/time from logs for cleaner output if desired,
 	// but let's keep it simple and just add color.
 	log.SetOutput(os.Stderr)
 }

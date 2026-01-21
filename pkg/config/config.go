@@ -12,29 +12,32 @@ type Config struct {
 	VerifyFiles          []string
 	VerifyGeneratedFiles []string
 	Mocks                []string
+	ShowVersion          bool
 }
 
 func ParseArgs(args []string) (*Config, error) {
 	fs := flag.NewFlagSet("deb-tester", flag.ContinueOnError)
-	
+
 	var (
-		repeat           = fs.Int("repeat", 1, "Number of install/remove cycles")
-		verifyFiles      = fs.String("verify-files", "", "Semicolon separated list of files to verify inside the deb")
-		verifyGenerated  = fs.String("verify-generated-files", "", "Semicolon separated list of script-generated files")
-		mocks            = fs.String("mock", "", "Semicolon separated list of commands to mock")
+		repeat          = fs.Int("repeat", 1, "Number of install/remove cycles")
+		verifyFiles     = fs.String("verify-files", "", "Semicolon separated list of files to verify inside the deb")
+		verifyGenerated = fs.String("verify-generated-files", "", "Semicolon separated list of script-generated files")
+		mocks           = fs.String("mock", "", "Semicolon separated list of commands to mock")
+		showVersion     = fs.Bool("version", false, "Show version and exit")
 	)
 
 	if err := fs.Parse(args); err != nil {
 		return nil, err
 	}
 
-	if fs.NArg() == 0 {
+	if fs.NArg() == 0 && !*showVersion {
 		return nil, fmt.Errorf("missing deb file argument")
 	}
 
 	cfg := &Config{
-		DebPath: fs.Arg(0),
-		Repeat:  *repeat,
+		DebPath:     fs.Arg(0),
+		Repeat:      *repeat,
+		ShowVersion: *showVersion,
 	}
 
 	if *verifyFiles != "" {

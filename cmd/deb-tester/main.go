@@ -3,11 +3,13 @@ package main
 import (
 	"errors"
 	"flag"
+	"fmt"
 	"os"
 
 	"deb-tester/pkg/config"
 	"deb-tester/pkg/logger"
 	"deb-tester/pkg/runner"
+	"deb-tester/pkg/version"
 )
 
 func main() {
@@ -18,6 +20,11 @@ func main() {
 		}
 		logger.Error("Configuration error: %v", err)
 		os.Exit(1)
+	}
+
+	if cfg.ShowVersion {
+		fmt.Println(version.Version)
+		os.Exit(0)
 	}
 
 	logger.Info("Starting Deb Tester with: %+v", cfg)
