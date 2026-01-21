@@ -1,16 +1,11 @@
 stages:
-  - build
+  - test-deb
 
-variables:
-  TEST_IMAGE: my-registry/deb-tester:latest
-
-# Build the tester image
-build_tester:
-  stage: build
-  image: docker:latest
-  services:
-    - docker:dind
+test_deb:
+  stage: test-deb
+  image: "example/deb-tester:latest"
   script:
-    - docker build -t $TEST_IMAGE .
-    # - docker push $TEST_IMAGE
+    # Since the image entrypoint is the app itself, we can pass args or check help
+    # Note: GitLab CI overrides the entrypoint to run the shell script
+    - deb-tester --help
 
