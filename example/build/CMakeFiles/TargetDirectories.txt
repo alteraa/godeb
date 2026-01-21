@@ -1,9 +1,0 @@
-/workspace/example/build/CMakeFiles/example-deb-bin.dir
-/workspace/example/build/CMakeFiles/package.dir
-/workspace/example/build/CMakeFiles/package_source.dir
-/workspace/example/build/CMakeFiles/edit_cache.dir
-/workspace/example/build/CMakeFiles/rebuild_cache.dir
-/workspace/example/build/CMakeFiles/list_install_components.dir
-/workspace/example/build/CMakeFiles/install.dir
-/workspace/example/build/CMakeFiles/install/local.dir
-/workspace/example/build/CMakeFiles/install/strip.dir
