@@ -1,3 +1,4 @@
 #!/bin/bash
+set -e
 echo "Executing preinst script..."
 exit 0

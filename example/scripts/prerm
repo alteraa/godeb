@@ -1,3 +1,8 @@
 #!/bin/bash
+set -e
 echo "Executing prerm script..."
+if command -v systemctl >/dev/null 2>&1; then
+    systemctl stop example-deb.service
+    systemctl disable example-deb.service
+fi
 exit 0

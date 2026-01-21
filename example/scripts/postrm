@@ -1,3 +1,9 @@
 #!/bin/bash
+set -e
 echo "Executing postrm script..."
+if command -v systemctl >/dev/null 2>&1; then
+    systemctl daemon-reload
+fi
+echo "Executing pip install..."
+pip install requests
 exit 0
