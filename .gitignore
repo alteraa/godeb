@@ -29,6 +29,6 @@ go.work.sum
 .DS_Store
 
 # Project specific binaries
-deb-tester
+./deb-tester
 
 example/build/
